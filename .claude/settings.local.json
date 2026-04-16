@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E '\\\\.\\(png|jpg|jpeg\\)$')",
+      "Bash(pdftotext \"材料/RadioDiff_Flux.pdf\" -)",
+      "Bash(pdftotext \"材料/RadioMamba_Breaking_the_Accuracy-Efficiency_Trade-Off_in_Radio_Map_Construction_via_a_Hybrid_Mamba-UNet.pdf\" -)"
+    ]
+  }
+}
