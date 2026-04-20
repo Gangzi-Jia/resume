@@ -104,20 +104,27 @@
       align-items: center;
     }
 
-    .nav-links a {
+    .nav-links a,
+    .nav-group-toggle {
       color: var(--text2);
       font-size: 0.9rem;
       font-weight: 500;
+      font-family: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
       transition: color 0.3s;
       position: relative;
       writing-mode: horizontal-tb;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover,
+    .nav-group-toggle:hover {
       color: var(--accent);
     }
 
-    .nav-links a::after {
+    .nav-links a::after,
+    .nav-group-toggle::after {
       content: '';
       position: absolute;
       bottom: -4px;
@@ -128,8 +135,60 @@
       transition: width 0.3s;
     }
 
-    .nav-links a:hover::after {
+    .nav-links a:hover::after,
+    .nav-group-toggle:hover::after,
+    .nav-links a.active::after,
+    .nav-group-toggle.active::after {
       width: 100%;
+    }
+
+    .nav-links a.active,
+    .nav-group-toggle.active {
+      color: var(--accent);
+    }
+
+    .nav-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-group-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0;
+    }
+
+    .nav-caret {
+      width: 8px;
+      height: 8px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg) translateY(-1px);
+      transition: transform 0.3s ease;
+    }
+
+    .nav-group.open .nav-caret {
+      transform: rotate(225deg) translateY(-1px);
+    }
+
+    .nav-group-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      list-style: none;
+      align-items: center;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav-group.open .nav-group-menu {
+      max-height: 180px;
+      opacity: 1;
     }
 
     .nav-links .nav-sub a {
@@ -934,6 +993,11 @@
         border-bottom: 1px solid var(--card-border);
       }
 
+      .nav-group,
+      .nav-group-menu {
+        align-items: flex-start;
+      }
+
       .nav-links.open {
         display: flex;
       }
@@ -1015,10 +1079,18 @@
     <div class="nav-logo">JHG</div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">关于</a></li>
-      <li><a href="#projects">项目经历</a></li>
-      <li class="nav-sub"><a href="#projects-intern">　实习经历</a></li>
-      <li class="nav-sub"><a href="#projects-competition">　竞赛经历</a></li>
-      <li class="nav-sub"><a href="#projects-research">　科研项目</a></li>
+      <li class="nav-group" id="projectsGroup">
+        <button type="button" class="nav-group-toggle" id="projectsToggle" data-nav-target="#projects"
+          aria-expanded="false" aria-controls="projectsSubmenu">
+          <span>项目经历</span>
+          <span class="nav-caret" aria-hidden="true"></span>
+        </button>
+        <ul class="nav-group-menu" id="projectsSubmenu">
+          <li class="nav-sub"><a href="#projects-intern">实习经历</a></li>
+          <li class="nav-sub"><a href="#projects-competition">竞赛经历</a></li>
+          <li class="nav-sub"><a href="#projects-research">科研项目</a></li>
+        </ul>
+      </li>
       <li><a href="#publications">发表论文</a></li>
       <li><a href="#awards">获奖荣誉</a></li>
       <li><a href="#skills">技能专长</a></li>
@@ -1106,7 +1178,8 @@
       <div class="projects-grid fade-in">
         <!-- 移动实习 -->
         <div class="project-card">
-          <img src="assets/移动实习.png" alt="移动实习" class="project-image" onclick="openImageModal(this.src)">
+          <img src="assets/移动实习v2.jpg" alt="移动实习" class="project-image" loading="lazy" decoding="async"
+            onclick="openImageModal(this.src)">
           <div class="project-content">
             <h3>中国移动研究院实习</h3>
             <div class="project-subtitle">Radio Map构建项目 | 无线电终端技术研究部</div>
@@ -1136,7 +1209,8 @@
       <div class="projects-grid fade-in">
         <!-- 华为杯SVD -->
         <div class="project-card">
-          <img src="assets/华为svd.png" alt="华为杯SVD" class="project-image" onclick="openImageModal(this.src)">
+          <img src="assets/华为svd.png" alt="华为杯SVD" class="project-image" loading="lazy" decoding="async"
+            onclick="openImageModal(this.src)">
           <div class="project-content">
             <h3>2025华为杯通信算法大赛</h3>
             <div class="project-subtitle">AI使能的无线鲁棒SVD算子 | 西北赛区一等奖（前1%）</div>
@@ -1165,7 +1239,8 @@
       <div class="projects-grid fade-in">
         <!-- AeroRay -->
         <div class="project-card full-width">
-          <img src="assets/AeroRay.png" alt="AeroRay" class="project-image" onclick="openImageModal(this.src)">
+          <img src="assets/AeroRay.png" alt="AeroRay" class="project-image" loading="lazy" decoding="async"
+            onclick="openImageModal(this.src)">
           <div class="project-content">
             <h3>AeroRay</h3>
             <div class="project-subtitle">LLM驱动的低空电磁仿真智能孪生平台 | <a href="https://drive.google.com/file/d/1oQpO2oU7YwLtZhrm51yCilpsZmId--Zp/view?usp=sharing" target="_blank" style="color: var(--accent);">平台演示视频</a></div>
@@ -1190,7 +1265,8 @@
 
         <!-- RadioDiff-Flux -->
         <div class="project-card">
-          <img src="assets/flux.png" alt="RadioDiff-Flux" class="project-image" onclick="openImageModal(this.src)">
+          <img src="assets/flux.png" alt="RadioDiff-Flux" class="project-image" loading="lazy" decoding="async"
+            onclick="openImageModal(this.src)">
           <div class="project-content">
             <h3>RadioDiff-Flux</h3>
             <div class="project-subtitle">基于扩散模型中间点重用的高效射频地图构建</div>
@@ -1213,7 +1289,8 @@
 
         <!-- RadioMamba -->
         <div class="project-card">
-          <img src="assets/Mamba.png" alt="RadioMamba" class="project-image" onclick="openImageModal(this.src)">
+          <img src="assets/Mamba.png" alt="RadioMamba" class="project-image" loading="lazy" decoding="async"
+            onclick="openImageModal(this.src)">
           <div class="project-content">
             <h3>RadioMamba</h3>
             <div class="project-subtitle">打破射频地图构建精度-效率权衡的混合Mamba-UNet架构</div>
@@ -1236,7 +1313,8 @@
 
         <!-- RadioMapMotion -->
         <div class="project-card">
-          <img src="assets/Motion.png" alt="RadioMapMotion" class="project-image" onclick="openImageModal(this.src)">
+          <img src="assets/Motion.png" alt="RadioMapMotion" class="project-image" loading="lazy" decoding="async"
+            onclick="openImageModal(this.src)">
           <div class="project-content">
             <h3>RadioMapMotion</h3>
             <div class="project-subtitle">首个时空射频地图预测数据集与基准</div>
@@ -1259,7 +1337,8 @@
 
         <!-- UrbanMIMOMap -->
         <div class="project-card">
-          <img src="assets/urbanmimomap.png" alt="UrbanMIMOMap" class="project-image" onclick="openImageModal(this.src)">
+          <img src="assets/urbanmimomap.png" alt="UrbanMIMOMap" class="project-image" loading="lazy" decoding="async"
+            onclick="openImageModal(this.src)">
           <div class="project-content">
             <h3>UrbanMIMOMap</h3>
             <div class="project-subtitle">首个大规模城市MIMO CSI数据集</div>
@@ -1282,7 +1361,8 @@
 
         <!-- 语义通信 -->
         <div class="project-card">
-          <img src="assets/语义通信.png" alt="语义通信" class="project-image" onclick="openImageModal(this.src)">
+          <img src="assets/语义通信.png" alt="语义通信" class="project-image" loading="lazy" decoding="async"
+            onclick="openImageModal(this.src)">
           <div class="project-content">
             <h3>Semantic Communication Framework</h3>
             <div class="project-subtitle">面向6G的语义通信框架</div>
@@ -1305,7 +1385,8 @@
 
         <!-- 智能空战 -->
         <div class="project-card">
-          <img src="assets/智能空战.png" alt="智能空战" class="project-image" onclick="openImageModal(this.src)">
+          <img src="assets/智能空战.png" alt="智能空战" class="project-image" loading="lazy" decoding="async"
+            onclick="openImageModal(this.src)">
           <div class="project-content">
             <h3>Multi-Agent Air Combat Simulation</h3>
             <div class="project-subtitle">基于NetLogo的多智能体空战模拟</div>
@@ -1443,57 +1524,59 @@
       </div>
       <div class="skills-grid fade-in">
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">Python</span><span class="skill-level">Expert</span></div>
+          <div class="skill-header"><span class="skill-name">Vibe Coding</span><span class="skill-level">擅长</span></div>
           <div class="skill-bar">
             <div class="skill-bar-fill" data-width="95"></div>
           </div>
         </div>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">PyTorch</span><span class="skill-level">Expert</span></div>
+          <div class="skill-header"><span class="skill-name">Python</span><span class="skill-level">掌握</span></div>
           <div class="skill-bar">
             <div class="skill-bar-fill" data-width="90"></div>
           </div>
         </div>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">C / C++</span><span class="skill-level">Proficient</span>
+          <div class="skill-header"><span class="skill-name">PyTorch</span><span class="skill-level">掌握</span>
           </div>
+          <div class="skill-bar">
+            <div class="skill-bar-fill" data-width="88"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">LangChain</span><span class="skill-level">掌握</span></div>
+          <div class="skill-bar">
+            <div class="skill-bar-fill" data-width="86"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">C++</span><span class="skill-level">熟悉</span></div>
           <div class="skill-bar">
             <div class="skill-bar-fill" data-width="75"></div>
           </div>
         </div>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">React / JavaScript</span><span
-              class="skill-level">Proficient</span></div>
+          <div class="skill-header"><span class="skill-name">MATLAB</span><span class="skill-level">熟悉</span></div>
           <div class="skill-bar">
-            <div class="skill-bar-fill" data-width="80"></div>
+            <div class="skill-bar-fill" data-width="72"></div>
           </div>
         </div>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">Three.js / WebGL</span><span
-              class="skill-level">Proficient</span></div>
+          <div class="skill-header"><span class="skill-name">React</span><span class="skill-level">熟悉</span>
+          </div>
           <div class="skill-bar">
-            <div class="skill-bar-fill" data-width="75"></div>
+            <div class="skill-bar-fill" data-width="74"></div>
           </div>
         </div>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">LangChain / LangGraph</span><span
-              class="skill-level">Proficient</span></div>
+          <div class="skill-header"><span class="skill-name">Three.js</span><span class="skill-level">熟悉</span></div>
           <div class="skill-bar">
-            <div class="skill-bar-fill" data-width="80"></div>
+            <div class="skill-bar-fill" data-width="72"></div>
           </div>
         </div>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">MATLAB</span><span class="skill-level">Proficient</span>
-          </div>
+          <div class="skill-header"><span class="skill-name">Git</span><span class="skill-level">熟悉</span></div>
           <div class="skill-bar">
-            <div class="skill-bar-fill" data-width="70"></div>
-          </div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">Git / Linux</span><span
-              class="skill-level">Proficient</span></div>
-          <div class="skill-bar">
-            <div class="skill-bar-fill" data-width="80"></div>
+            <div class="skill-bar-fill" data-width="74"></div>
           </div>
         </div>
       </div>
@@ -1726,17 +1809,79 @@
       }, 100);
     })();
 
-    // ===== Smooth Scroll for Nav Links =====
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = document.querySelector(link.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-          document.getElementById('navLinks').classList.remove('open');
-        }
+    // ===== Navigation Interaction =====
+    (function () {
+      const navLinks = document.getElementById('navLinks');
+      const projectsGroup = document.getElementById('projectsGroup');
+      const projectsToggle = document.getElementById('projectsToggle');
+      const navAnchors = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+      const navItems = [
+        ...navAnchors,
+        ...Array.from(document.querySelectorAll('.nav-group-toggle[data-nav-target]'))
+      ];
+
+      const sectionEntries = navItems
+        .map(item => {
+          const selector = item.dataset.navTarget || item.getAttribute('href');
+          return {
+            item,
+            selector,
+            target: document.querySelector(selector)
+          };
+        })
+        .filter(entry => entry.target);
+
+      function setProjectsMenuOpen(isOpen) {
+        projectsGroup.classList.toggle('open', isOpen);
+        projectsToggle.setAttribute('aria-expanded', String(isOpen));
+      }
+
+      projectsToggle.addEventListener('click', () => {
+        setProjectsMenuOpen(!projectsGroup.classList.contains('open'));
       });
-    });
+
+      navAnchors.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute('href'));
+          if (!target) return;
+
+          target.scrollIntoView({ behavior: 'smooth' });
+          navLinks.classList.remove('open');
+        });
+      });
+
+      function updateActiveNav() {
+        const scrollOffset = window.innerWidth <= 768 ? 120 : 160;
+        let currentEntry = sectionEntries[0];
+
+        sectionEntries.forEach(entry => {
+          if (window.scrollY + scrollOffset >= entry.target.offsetTop) {
+            currentEntry = entry;
+          }
+        });
+
+        navItems.forEach(item => item.classList.remove('active'));
+
+        if (currentEntry) {
+          currentEntry.item.classList.add('active');
+
+          const inProjectsArea = currentEntry.selector === '#projects'
+            || currentEntry.selector === '#projects-intern'
+            || currentEntry.selector === '#projects-competition'
+            || currentEntry.selector === '#projects-research';
+
+          if (inProjectsArea) {
+            projectsToggle.classList.add('active');
+            setProjectsMenuOpen(true);
+          }
+        }
+      }
+
+      window.addEventListener('scroll', updateActiveNav);
+      window.addEventListener('resize', updateActiveNav);
+      updateActiveNav();
+    })();
   </script>
 
 </body>
