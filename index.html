@@ -1829,7 +1829,11 @@
             target: document.querySelector(selector)
           };
         })
-        .filter(entry => entry.target);
+        .filter(entry => entry.target)
+        .sort((a, b) => {
+          function absTop(el) { let t = 0; while (el) { t += el.offsetTop; el = el.offsetParent; } return t; }
+          return absTop(a.target) - absTop(b.target);
+        });
 
       function setProjectsMenuOpen(isOpen) {
         projectsGroup.classList.toggle('open', isOpen);
@@ -1851,12 +1855,18 @@
         });
       });
 
+      function getAbsoluteTop(el) {
+        let top = 0;
+        while (el) { top += el.offsetTop; el = el.offsetParent; }
+        return top;
+      }
+
       function updateActiveNav() {
         const scrollOffset = window.innerWidth <= 768 ? 120 : 160;
         let currentEntry = sectionEntries[0];
 
         sectionEntries.forEach(entry => {
-          if (window.scrollY + scrollOffset >= entry.target.offsetTop) {
+          if (window.scrollY + scrollOffset >= getAbsoluteTop(entry.target)) {
             currentEntry = entry;
           }
         });
