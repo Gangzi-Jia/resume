@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AeroRay | 项目详情</title>
+  <meta name="description" content="AeroRay - 大模型驱动的低空电磁智能孪生平台项目介绍">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0a0e17;
+      --bg2: #0f1423;
+      --bg3: #141a2e;
+      --text: #e0e6f0;
+      --text2: #8892a8;
+      --accent: #00d4ff;
+      --accent2: #7b61ff;
+      --accent3: #ff6b9d;
+      --gradient: linear-gradient(135deg, #00d4ff, #7b61ff);
+      --card-bg: rgba(20, 26, 46, 0.72);
+      --card-border: rgba(0, 212, 255, 0.12);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: radial-gradient(circle at 20% 0%, rgba(0, 212, 255, 0.14), transparent 30%), radial-gradient(circle at 80% 20%, rgba(123, 97, 255, 0.16), transparent 30%), var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .page { position: relative; z-index: 1; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8vw;
+      background: rgba(10, 14, 23, 0.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(0, 212, 255, 0.08);
+    }
+    .brand { font-weight: 800; letter-spacing: 0.08em; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .back { color: var(--text2); font-size: 0.92rem; transition: color 0.2s; }
+    .back:hover { color: var(--accent); }
+    .hero {
+      min-height: 78vh;
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 46px;
+      align-items: center;
+      padding: 72px 8vw 52px;
+    }
+    .eyebrow { color: var(--accent); font-size: 0.9rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 18px; }
+    h1 { font-size: clamp(2.8rem, 7vw, 6rem); line-height: 1; margin-bottom: 22px; }
+    .hero-title span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-desc { color: var(--text2); font-size: 1.08rem; max-width: 720px; margin-bottom: 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 212, 255, 0.24);
+      color: var(--text);
+      background: rgba(0, 212, 255, 0.08);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .btn.primary { background: var(--gradient); color: #fff; border: none; }
+    .hero-card {
+      border: 1px solid var(--card-border);
+      background: linear-gradient(180deg, rgba(20, 26, 46, 0.88), rgba(10, 14, 23, 0.88));
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    }
+    .hero-card img { width: 100%; height: 420px; object-fit: contain; background: var(--bg3); padding: 16px; }
+    .hero-card-footer { display: flex; justify-content: space-between; gap: 16px; padding: 18px 22px; color: var(--text2); font-size: 0.9rem; }
+    .section { padding: 56px 8vw; }
+    .section-title { font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 12px; }
+    .section-subtitle { color: var(--text2); max-width: 820px; margin-bottom: 28px; }
+    .grid { display: grid; gap: 20px; }
+    .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+    }
+    .card h3 { font-size: 1.08rem; margin-bottom: 10px; color: var(--text); }
+    .card p, .card li { color: var(--text2); font-size: 0.94rem; }
+    .card strong { color: var(--accent); }
+    .metric { font-size: 2rem; line-height: 1; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+    .flow-step { position: relative; padding: 18px; border-radius: 16px; background: rgba(0, 212, 255, 0.06); border: 1px solid rgba(0, 212, 255, 0.12); }
+    .flow-step span { color: var(--accent); font-weight: 800; font-size: 0.82rem; }
+    .flow-step p { color: var(--text2); font-size: 0.9rem; margin-top: 8px; }
+    .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .shot { overflow: hidden; padding: 0; }
+    .shot img { width: 100%; height: 320px; object-fit: contain; background: var(--bg3); padding: 10px; cursor: zoom-in; }
+    .shot .caption { padding: 16px 18px; }
+    .shot .caption h3 { margin-bottom: 4px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .tags span { padding: 5px 11px; border-radius: 999px; background: rgba(123, 97, 255, 0.12); color: var(--accent2); border: 1px solid rgba(123, 97, 255, 0.22); font-size: 0.78rem; font-weight: 700; }
+    .timeline { display: grid; gap: 14px; }
+    .timeline-item { display: grid; grid-template-columns: 170px 1fr; gap: 18px; padding: 18px; border-radius: 16px; background: rgba(20, 26, 46, 0.58); border: 1px solid rgba(0, 212, 255, 0.08); }
+    .timeline-item b { color: var(--accent); }
+    .footer { padding: 42px 8vw 64px; color: var(--text2); text-align: center; }
+    .image-modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0, 0, 0, 0.94); align-items: center; justify-content: center; padding: 28px; }
+    .image-modal.active { display: flex; }
+    .image-modal img { max-width: 94vw; max-height: 90vh; object-fit: contain; }
+    .image-modal button { position: absolute; top: 22px; right: 28px; background: none; border: none; color: #fff; font-size: 42px; cursor: pointer; }
+    .doc-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .doc-nav a { padding: 8px 12px; border-radius: 999px; background: rgba(0, 212, 255, 0.07); border: 1px solid rgba(0, 212, 255, 0.14); color: var(--text2); font-size: 0.86rem; }
+    .doc-nav a:hover { color: var(--accent); border-color: rgba(0, 212, 255, 0.3); }
+    .table-wrap { overflow-x: auto; border-radius: 16px; border: 1px solid rgba(0, 212, 255, 0.1); }
+    table { width: 100%; border-collapse: collapse; min-width: 760px; background: rgba(20, 26, 46, 0.46); }
+    th, td { padding: 13px 14px; border-bottom: 1px solid rgba(0, 212, 255, 0.08); text-align: left; vertical-align: top; color: var(--text2); font-size: 0.9rem; }
+    th { color: var(--accent); background: rgba(0, 212, 255, 0.06); font-weight: 800; }
+    tr:last-child td { border-bottom: none; }
+    .code-block { padding: 18px; border-radius: 16px; overflow-x: auto; background: rgba(3, 7, 18, 0.72); border: 1px solid rgba(0, 212, 255, 0.12); color: #c7d2fe; font-size: 0.86rem; line-height: 1.65; margin-top: 18px; }
+    .doc-list { padding-left: 20px; color: var(--text2); }
+    .doc-list li { margin-bottom: 8px; }
+    .section-kicker { color: var(--accent); font-weight: 800; margin-bottom: 8px; letter-spacing: 0.06em; }
+    .wide-card { margin-top: 20px; }
+    @media (max-width: 980px) {
+      .hero, .grid.cols-3, .grid.cols-2, .gallery, .flow { grid-template-columns: 1fr; }
+      .hero { padding-top: 48px; }
+      .hero-card img, .shot img { height: auto; }
+      .timeline-item { grid-template-columns: 1fr; }
+      table { min-width: 620px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="nav">
+      <a class="brand" href="index.html">JHG</a>
+      <a class="back" href="index.html#projects-research">← 返回项目列表</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">AeroRay · Low-altitude Electromagnetic Digital Twin</div>
+          <h1 class="hero-title"><span>AeroRay</span><br>低空电磁智能孪生平台</h1>
+          <p class="hero-desc">AeroRay 是一个基于大语言模型驱动的低空电磁智能孪生平台。用户通过自然语言即可完成区域解析、建筑场景建模、多基站三维射线仿真、干扰态势分析，以及无人机/蜂群航线规划，结果以实时 3D 场景在浏览器中呈现。</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#gallery">查看项目截图</a>
+            <a class="btn" href="https://drive.google.com/file/d/1oQpO2oU7YwLtZhrm51yCilpsZmId--Zp/view?usp=sharing" target="_blank" rel="noopener">平台演示视频</a>
+          </div>
+          <div class="tags">
+            <span>LLM Agent</span><span>LangGraph</span><span>FastAPI</span><span>React</span><span>Three.js</span><span>WinProp SDK</span><span>C++</span><span>WebSocket</span>
+          </div>
+          <nav class="doc-nav">
+            <a href="#overview">项目概述</a>
+            <a href="#agent">Agent 架构</a>
+            <a href="#low-alt">低空算法</a>
+            <a href="#engine">仿真引擎</a>
+            <a href="#frontend">前端展示</a>
+            <a href="#extensions">扩展能力</a>
+            <a href="#data">数据流</a>
+            <a href="#ops">Agent Ops</a>
+            <a href="#tests">测试结果</a>
+          </nav>
+        </div>
+        <div class="hero-card">
+          <img src="assets/AeroRay.png" alt="AeroRay 平台截图">
+          <div class="hero-card-footer">
+            <span>对话驱动仿真</span>
+            <span>三维信号场可视化</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <h2 class="section-title">项目定位</h2>
+        <p class="section-subtitle">AeroRay 不是简单把 LLM 接入仿真软件，而是把任务理解、流程规划、参数协同和模块编排引入真实 Radio Map 仿真链路。</p>
+        <div class="grid cols-3">
+          <div class="card"><h3>自然语言入口</h3><p>用对话描述区域、场景和任务，Agent 自动组织地理数据提取、建筑建模、仿真准备和结果可视化。</p></div>
+          <div class="card"><h3>工业级仿真底座</h3><p>底层集成 Altair WinProp，支持 DPM 快速覆盖预测与 IRT 精细射线追踪，保留专业仿真可信度。</p></div>
+          <div class="card"><h3>低空协同主场景</h3><p>围绕无人机低空通信，完成多基站三维场构建、干扰态势分析、切换感知路径规划和蜂群协同。</p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">核心能力</h2>
+        <div class="grid cols-3">
+          <div class="card"><div class="metric">N×M</div><h3>多基站多高度仿真</h3><p>N 个基站 × M 个高度层循环执行 DPM，聚合为可交互的三维 per-BS 信号张量。</p></div>
+          <div class="card"><div class="metric">4</div><h3>干扰态势模式</h3><p>支持 RSRP、主导基站、SINR、重叠覆盖四类分析，并在前端基于张量实时切换。</p></div>
+          <div class="card"><div class="metric">1-10</div><h3>蜂群协同规划</h3><p>支持 1 到 10 架无人机共享起终点，结合初始基站分配、容量约束与时间错峰生成差异化航线。</p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">系统架构</h2>
+        <p class="section-subtitle">平台由 React/Three.js 前端、FastAPI + LangGraph Agent 后端、C++ WinProp SDK 仿真引擎组成，通过 WebSocket 和文件级 IPC 串联端到端工作流。</p>
+        <div class="flow">
+          <div class="flow-step"><span>01 用户输入</span><p>自然语言描述区域、低空任务、基站和航线需求。</p></div>
+          <div class="flow-step"><span>02 Agent 编排</span><p>LangGraph ReAct Agent 调用 11 个工具完成流程规划。</p></div>
+          <div class="flow-step"><span>03 场景建模</span><p>OSM/SHP 建筑提取，转换为 WinProp ODB/OIB 数据库。</p></div>
+          <div class="flow-step"><span>04 仿真计算</span><p>C++ 调用 WinProp SDK 执行 DPM/IRT 与 MIMO RunMS。</p></div>
+          <div class="flow-step"><span>05 3D 可视化</span><p>Three.js 渲染建筑、基站、体素信号场、航线和无人机动画。</p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">关键算法与工程设计</h2>
+        <div class="grid cols-2">
+          <div class="card"><h3>per-BS 三维张量</h3><p>不把多基站结果压成单张热力图，而是保留每个基站在每个高度层的独立场强，为主导基站、SINR、重叠覆盖和切换规划提供统一数据底座。</p></div>
+          <div class="card"><h3>切换感知 A*</h3><p>将状态空间从 <strong>(x, y, z)</strong> 扩展为 <strong>(x, y, z, bs_id)</strong>，把当前服务基站、切换代价和信号质量纳入路径搜索。</p></div>
+          <div class="card"><h3>Agent Ops 稳定性体系</h3><p>引入 TaskManifest、Guardrails、FailureTaxonomy、Checkpoint/Resume，对 12 类关键工具做前置、后置和互斥检查。</p></div>
+          <div class="card"><h3>参数确认快速通道</h3><p>高成本仿真阶段绕过 LLM，由前端参数面板确认后直接触发后端执行，避免模型自行拼装不完整参数导致流程失控。</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="agent">
+        <div class="section-kicker">Agent Layer</div>
+        <h2 class="section-title">Agent 架构层</h2>
+        <p class="section-subtitle">后端采用 FastAPI + LangGraph ReAct Agent。LLM 不直接执行高成本仿真，而是调用经过 Pydantic 校验的工具；关键执行节点由 server 拦截、确认和调度。</p>
+        <div class="grid cols-2">
+          <div class="card"><h3>多模型接入</h3><p>通过 `config.yaml` profile 机制切换 Claude、MiniMax、Local Qwen 等模型，统一配置 `base_url / model / api_type / temperature`，温度固定为 0 保证流程稳定。</p></div>
+          <div class="card"><h3>LangGraph ReAct 编排</h3><p>Agent 以“推理 → 调工具 → 读结果 → 再推理”的循环完成任务，每个会话用 `thread_id` 隔离，并用 MemorySaver 保存状态。</p></div>
+        </div>
+        <div class="card wide-card">
+          <h3>LLM 可见工具</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>工具</th><th>职责</th><th>说明</th></tr></thead>
+              <tbody>
+                <tr><td>resolve_area</td><td>地名/坐标标准化，创建 run_dir</td><td>所有新任务必须先调用</td></tr>
+                <tr><td>extract_buildings</td><td>OSM/本地 SHP 建筑提取、裁剪、去重叠</td><td>输出建筑 JSON 与最终 SHP</td></tr>
+                <tr><td>export_odb</td><td>SHP 转 WinProp ODB/OIB</td><td>DPM 输出 .odb，IRT 额外生成 .oib</td></tr>
+                <tr><td>visualize_scene</td><td>建筑预览与 3D scene_data 生成</td><td>前端可直接恢复场景</td></tr>
+                <tr><td>prepare_multi_bs</td><td>低空/地面多基站参数准备</td><td>当前低空主入口，默认 `mode=low_alt`</td></tr>
+                <tr><td>prepare_ray_tracing / execute_ray_tracing</td><td>地面单基站 DPM/IRT 准备与执行</td><td>用于精细覆盖、射线和 MIMO 分析</td></tr>
+                <tr><td>visualize_radiomap / analyze_coverage / analyze_mimo</td><td>地面单基站后处理</td><td>覆盖统计、MIMO SVD、RadioMap 可视化</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <pre class="code-block">自然语言请求
+→ resolve_area
+→ extract_buildings
+→ visualize_scene
+→ export_odb(pred_model="dpm")
+→ prepare_multi_bs(mode="low_alt")
+→ 前端 MultiBSPanel 参数确认
+→ server 直接 execute_multi_bs
+→ Three.js 加载三维信号场、干扰态势和航线结果</pre>
+      </section>
+
+      <section class="section" id="low-alt">
+        <div class="section-kicker">Low-altitude Core</div>
+        <h2 class="section-title">低空多基站协同算法</h2>
+        <p class="section-subtitle">低空模块是 AeroRay 的核心，面向低空通信走廊评估、多基站干扰态势和无人机/蜂群通信约束航线规划。</p>
+        <div class="grid cols-3">
+          <div class="card"><h3>低空覆盖空洞</h3><p>现网基站天线多为对地下倾，100m 以上可能出现弱覆盖，需要构建多个高度层的联合三维信号场。</p></div>
+          <div class="card"><h3>多基站干扰态势</h3><p>同一低空位置可能被多个基站覆盖，系统提供 RSRP、主导基站、SINR、重叠覆盖四类视图。</p></div>
+          <div class="card"><h3>通信感知航线</h3><p>航线规划不仅考虑距离与障碍，还把链路质量和基站切换代价纳入搜索。</p></div>
+        </div>
+        <div class="card wide-card">
+          <h3>核心模块</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>文件</th><th>职责</th><th>关键点</th></tr></thead>
+              <tbody>
+                <tr><td>skill/multi_bs/skill_multi_bs.py</td><td>多基站编排层</td><td>prepare_multi_bs、execute_multi_bs、plan_multi_bs_route、plan_swarm_routes</td></tr>
+                <tr><td>skill/multi_bs/field_store.py</td><td>per-BS 张量存取</td><td>npz 存储、障碍掩码、默认基站布局</td></tr>
+                <tr><td>skill/multi_bs/handover_astar.py</td><td>切换感知 A*</td><td>状态空间扩展为 `(x,y,z,bs_id)`</td></tr>
+                <tr><td>skill/multi_bs/swarm_planner.py</td><td>蜂群规划</td><td>优先级解耦、容量约束、初始基站多样化</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="grid cols-2 wide-card">
+          <div class="card"><h3>per-BS 三维张量</h3><p>`execute_multi_bs()` 在低空模式输出 `(N_bs, nx, ny, nz)`，保留每个基站在每个高度层的独立场强，用于推导主导基站、SINR、重叠覆盖、切换路径和容量约束。</p></div>
+          <div class="card"><h3>前端实时干扰分析</h3><p>InterferenceOverlay 直接从张量计算 RSRP、Dominance、SINR、Overlap，切换视图无需重跑后端仿真。</p></div>
+          <div class="card"><h3>切换感知 A*</h3><p>传统 A* 的 `(x,y,z)` 被扩展为 `(x,y,z,bs_id)`，只有当前基站弱且目标基站提升明显时才切换，避免乒乓效应。</p></div>
+          <div class="card"><h3>蜂群协同</h3><p>多机共享起终点时，通过初始服务基站分散、每基站容量限制和时间错峰生成差异化航线。</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="engine">
+        <div class="section-kicker">Simulation Engine</div>
+        <h2 class="section-title">数据获取与 WinProp 仿真引擎</h2>
+        <p class="section-subtitle">底层计算由 Python 编排、C++ 调用 Altair WinProp SDK 完成，不是前端近似渲染。</p>
+        <div class="flow">
+          <div class="flow-step"><span>01 区域解析</span><p>地名/坐标 → polygon.json。</p></div>
+          <div class="flow-step"><span>02 建筑提取</span><p>OSM Overpass 或本地 SHP 裁剪。</p></div>
+          <div class="flow-step"><span>03 坐标投影</span><p>WGS84 → 像素坐标 → ODB 坐标。</p></div>
+          <div class="flow-step"><span>04 数据库转换</span><p>SHP2ODB_debug.exe 生成 .odb/.oib。</p></div>
+          <div class="flow-step"><span>05 仿真执行</span><p>PropagationRunMSMIMOSingle 调用 DPM/IRT/MIMO。</p></div>
+        </div>
+        <div class="grid cols-2 wide-card">
+          <div class="card"><h3>DPM 主导路径模型</h3><p>基于主导传播路径估算信号强度，速度快，适合大范围、多高度、多基站循环仿真。低空主链路固定使用 DPM。</p><ul class="doc-list"><li>输入：`.odb` 建筑数据库</li><li>频率：3500 MHz</li><li>发射功率：23 dBm</li><li>适用：低空三维覆盖、多基站态势</li></ul></div>
+          <div class="card"><h3>IRT 智能射线追踪</h3><p>考虑反射、衍射、散射等物理传播路径，精度更高但计算量大，适合地面单基站精细分析。</p><ul class="doc-list"><li>输入：`.oib` 预处理数据库</li><li>支持点击 RadioMap 查看主导射线</li><li>预处理分辨率生成后不可更改</li><li>适用：覆盖分析、MIMO、射线解释</li></ul></div>
+        </div>
+      </section>
+
+      <section class="section" id="frontend">
+        <div class="section-kicker">Frontend</div>
+        <h2 class="section-title">前端展示层</h2>
+        <p class="section-subtitle">前端采用 React + Three.js + WebSocket，把对话、参数确认、三维场景和分析浮层放在同一工作台内。</p>
+        <div class="grid cols-3">
+          <div class="card"><h3>FeaturePanel</h3><p>功能入口、区域坐标输入、多基站/单基站/低空场景触发。</p></div>
+          <div class="card"><h3>ThreeScene</h3><p>渲染建筑、基站塔、信号场体素、分段着色航线、无人机动画和动态连接线。</p></div>
+          <div class="card"><h3>ChatPanel</h3><p>显示流式对话、工具调用、工具结果、错误提示和多会话记录。</p></div>
+          <div class="card"><h3>MultiBSPanel</h3><p>确认基站位置、频率、功率、分辨率和高度层。</p></div>
+          <div class="card"><h3>UAVPlanPanelV2</h3><p>统一承载单机与蜂群路径规划，展示切换时间轴和规划指标。</p></div>
+          <div class="card"><h3>InterferenceOverlay</h3><p>提供 RSRP、SINR、主导基站、重叠覆盖四种干扰态势视图。</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="extensions">
+        <div class="section-kicker">Extended Capabilities</div>
+        <h2 class="section-title">地面单基站与扩展分析能力</h2>
+        <p class="section-subtitle">低空多基站是主链路，地面单基站 IRT、覆盖统计、MIMO 信道分析作为精细分析工具，补充解释性和通信指标评估。</p>
+        <div class="grid cols-2">
+          <div class="card"><h3>IRT 射线追踪</h3><p>点击 RadioMap 任意点后，系统从 `.str` 结果中提取附近主导射线，在三维场景中绘制传播路径，并展示时延、场强、角度、反射/衍射类型等信息。</p></div>
+          <div class="card"><h3>覆盖统计分析</h3><p>CoverageOverlay 支持 IR、PDF、CDF、Threshold 四类视图，从整体分布角度评估覆盖质量，而不是只依赖热力图颜色。</p></div>
+          <div class="card"><h3>MIMO 信道分析</h3><p>基于 4×4 复数信道矩阵执行 SVD，计算信道容量、有效秩、条件数、最大奇异值，用于评估空间复用能力和信道健康度。</p></div>
+          <div class="card"><h3>地面多基站态势</h3><p>当用户明确要求地面/2D/单平面场景时，系统可运行平面多基站仿真，展示地面主导基站与干扰分布。</p></div>
+        </div>
+        <div class="card wide-card">
+          <h3>MIMO 四类指标</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>指标</th><th>计算含义</th><th>物理意义</th></tr></thead>
+              <tbody>
+                <tr><td>信道容量</td><td>Σ log₂(1 + SNR/Nt × σᵢ²)</td><td>给定 SNR 下的理论最大传输速率</td></tr>
+                <tr><td>有效秩</td><td>奇异值大于阈值的数量</td><td>可并行传输的独立空间流数量</td></tr>
+                <tr><td>条件数</td><td>σmax / σmin</td><td>信道矩阵健康度，越小越均衡</td></tr>
+                <tr><td>最大奇异值</td><td>主奇异值强度</td><td>主信道增益强度</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="data">
+        <div class="section-kicker">Data Flow</div>
+        <h2 class="section-title">数据流、协议与文件产物</h2>
+        <p class="section-subtitle">每个任务创建独立 `run_dir`，通过文件边界沉淀中间状态，便于追踪、复用和断点恢复。</p>
+        <div class="card">
+          <h3>低空 WebSocket 消息</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>消息</th><th>方向</th><th>用途</th></tr></thead>
+              <tbody>
+                <tr><td>multi_bs_config</td><td>server → client</td><td>推送多基站参数面板配置</td></tr>
+                <tr><td>multi_bs_confirmed</td><td>client → server</td><td>用户确认多基站仿真参数</td></tr>
+                <tr><td>multi_bs_progress</td><td>server → client</td><td>推送 N×M 次 DPM 仿真进度</td></tr>
+                <tr><td>plan_swarm</td><td>client → server</td><td>触发 1-10 架无人机蜂群规划</td></tr>
+                <tr><td>swarm_done / uav_route_done</td><td>server → client</td><td>返回蜂群/单机路径规划结果</td></tr>
+                <tr><td>viz_update</td><td>server → client</td><td>通知前端重新加载 scene_data</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <pre class="code-block">resu/{timestamp}/
+├── polygon.json
+├── json/buildings_with_height.json
+├── shp/result_final.shp
+├── shp/result_final.odb
+├── shp/result_final_IRT.oib
+├── ground/BS1/h1/Antenna_1 Path Loss.txt
+├── ground/BS1/h1/runMS/ChannelMatricesPerPoint.txt
+├── dikong/multi_bs_field.npz
+├── dikong/multi_bs_field_meta.json
+├── scene_data.json
+├── ray_tracing_params.json
+└── final_visualization.png</pre>
+      </section>
+
+      <section class="section" id="ops">
+        <div class="section-kicker">Agent Ops</div>
+        <h2 class="section-title">Agent Ops 稳定性体系</h2>
+        <p class="section-subtitle">这是 AeroRay 区别于“套壳 LLM/LangChain”的核心工程部分：把 Prompt 约束、流程阶段、失败恢复和指标统计代码化。</p>
+        <div class="grid cols-3">
+          <div class="card"><div class="metric">1580+</div><h3>Agent Ops 代码</h3><p>7 个解耦模块覆盖任务清单、状态机、护栏、失败分类、断点续跑、集成层与指标聚合。</p></div>
+          <div class="card"><div class="metric">15</div><h3>工作流阶段</h3><p>从 CREATED、AREA_RESOLVED 到 MULTI_BS_DONE、FAILED、CANCELLED，合法跃迁由状态机控制。</p></div>
+          <div class="card"><div class="metric">12</div><h3>工具护栏</h3><p>对关键工具执行前置检查、互斥检查和产物后置检查，避免无效调用污染下游。</p></div>
+        </div>
+        <div class="card wide-card">
+          <h3>Agent Ops 模块地图</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>模块</th><th>路径</th><th>核心能力</th></tr></thead>
+              <tbody>
+                <tr><td>任务清单</td><td>task_manifest.py</td><td>TaskManifest、TaskEvent、JSONL 事件日志</td></tr>
+                <tr><td>状态机</td><td>workflow_state.py</td><td>WorkflowStage、TRANSITIONS、Checkpoint</td></tr>
+                <tr><td>代码级护栏</td><td>guardrails.py</td><td>TOOL_GUARDRAILS，检查模式、文件、确认状态和输出</td></tr>
+                <tr><td>失败分类学</td><td>failure_taxonomy.py</td><td>5 类失败、20+ 错误码、恢复策略</td></tr>
+                <tr><td>断点续跑</td><td>resume.py</td><td>CheckpointManager、ResumeManager</td></tr>
+                <tr><td>统一集成层</td><td>integration.py</td><td>AgentOpsManager 与 tool_execution 上下文管理器</td></tr>
+                <tr><td>指标聚合</td><td>trace_metrics.py</td><td>任务级、工具级、Agent 决策级指标</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="grid cols-2 wide-card">
+          <div class="card"><h3>FailureTaxonomy</h3><p>错误分为用户输入、LLM 决策、工具执行、状态管理、流程中断 5 类，并绑定检测条件与恢复策略。</p></div>
+          <div class="card"><h3>Checkpoint/Resume</h3><p>多基站仿真中断时保存阶段、参数、产物与已完成步骤；下次从最近可恢复节点继续。</p></div>
+          <div class="card"><h3>Guardrails</h3><p>覆盖 `resolve_area`、`prepare_multi_bs`、`execute_multi_bs`、`visualize_radiomap`、`analyze_mimo`、`plan_swarm_routes` 等 12 类工具。</p></div>
+          <div class="card"><h3>Agent 身份系统</h3><p>`IDENTITY.md` 明确三类场景路由，并用 `[REOPEN_PARAMS]` 避免 LLM 直接拼参数执行高成本仿真。</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="tests">
+        <div class="section-kicker">Evaluation</div>
+        <h2 class="section-title">评测、测试与实验结果</h2>
+        <p class="section-subtitle">文档中同时给出了 LLM 编排评测、算法测试、基准对比、覆盖退化和蜂群规划性能数据。</p>
+        <div class="grid cols-3">
+          <div class="card"><div class="metric">85.0%</div><h3>LLM 编排平均分</h3><p>50 条 plan 用例总分 42.5，核心场景通过率 100%。</p></div>
+          <div class="card"><div class="metric">29/29</div><h3>算法测试通过</h3><p>单元、真实场景集成、性能基准和对比实验共 29 个用例，100% 通过，总耗时 143 秒。</p></div>
+          <div class="card"><div class="metric">0</div><h3>切换次数</h3><p>长距离路径规划中，Ours 将 Greedy 的 7 次切换降为 0 次。</p></div>
+        </div>
+        <div class="card wide-card">
+          <h3>路径规划算法对比</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>算法</th><th>路径长度</th><th>基站切换次数</th><th>扩展节点</th><th>耗时</th></tr></thead>
+              <tbody>
+                <tr><td>Ours（切换感知 A*）</td><td>836.4 m</td><td>0</td><td>21,533</td><td>2.42s</td></tr>
+                <tr><td>Greedy</td><td>927.9 m</td><td>7</td><td>36,155</td><td>1.32s</td></tr>
+                <tr><td>Dijkstra（无切换惩罚）</td><td>882.8 m</td><td>2</td><td>35,041</td><td>4.12s</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="grid cols-2 wide-card">
+          <div class="card"><h3>高度覆盖退化</h3><p>3 基站、100m~300m 实验中，100m 覆盖率为 97.5%；300m 覆盖率降至 89.8%，单基站覆盖比例升至 27.8%，验证低空通信走廊存在覆盖空洞。</p></div>
+          <div class="card"><h3>蜂群规划性能</h3><p>1、3、5、10 架无人机均 100% 成功；10 架时初始基站完全分散，容量违规来自 3 基站 × 容量 3 小于 10 的物理约束。</p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-kicker">Engineering Scale</div>
+        <h2 class="section-title">工程实现与代码规模</h2>
+        <p class="section-subtitle">AeroRay 覆盖 Agent、Skill、仿真、可视化、协议和稳定性基础设施，是完整工程系统而不是单一演示页面。</p>
+        <div class="card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>类型</th><th>文件数</th><th>行数</th><th>职责</th></tr></thead>
+              <tbody>
+                <tr><td>Python</td><td>60</td><td>13,854</td><td>Agent、Skill、接口、数据处理、Agent Ops</td></tr>
+                <tr><td>JSX</td><td>19</td><td>5,259</td><td>React 组件、三维交互、分析面板</td></tr>
+                <tr><td>JavaScript</td><td>3</td><td>4,398</td><td>前端工具、数据解析、协议处理</td></tr>
+                <tr><td>CSS</td><td>17</td><td>3,225</td><td>科技仪表盘样式与布局</td></tr>
+                <tr><td>C++</td><td>2</td><td>1,060</td><td>WinProp SDK 接入、SHP 转 ODB、传播仿真</td></tr>
+                <tr><td>合计</td><td>104</td><td>28,032</td><td>端到端全栈系统</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="gallery">
+        <h2 class="section-title">项目截图</h2>
+        <p class="section-subtitle">截图已复制到当前个人网站项目内，页面可离线本地访问。</p>
+        <div class="gallery">
+          <div class="card shot"><img src="assets/aeroray/low-alt-rsrp.png" alt="低空 RSRP" onclick="openImageModal(this.src)"><div class="caption"><h3>低空 RSRP</h3><p>展示多基站低空三维覆盖强度，用于识别覆盖空洞与弱覆盖区域。</p></div></div>
+          <div class="card shot"><img src="assets/aeroray/low-alt-sinr.png" alt="低空 SINR" onclick="openImageModal(this.src)"><div class="caption"><h3>低空 SINR</h3><p>结合信号与干扰计算链路质量，支撑低空通信态势判断。</p></div></div>
+          <div class="card shot"><img src="assets/aeroray/low-alt-dominance.png" alt="主导基站" onclick="openImageModal(this.src)"><div class="caption"><h3>主导基站分布</h3><p>显示每个空间位置的服务基站，用于分析服务区边界与切换机会。</p></div></div>
+          <div class="card shot"><img src="assets/aeroray/swarm-10.png" alt="蜂群路径" onclick="openImageModal(this.src)"><div class="caption"><h3>10 架无人机蜂群路径</h3><p>基于初始基站分散、容量约束和切换代价生成多条差异化航线。</p></div></div>
+          <div class="card shot"><img src="assets/aeroray/irt-rays.png" alt="IRT 射线" onclick="openImageModal(this.src)"><div class="caption"><h3>地面 IRT 射线检查</h3><p>点击热力图点位后回查主导射线路径，解释信号衰落来源。</p></div></div>
+          <div class="card shot"><img src="assets/aeroray/mimo-analysis.png" alt="MIMO 分析" onclick="openImageModal(this.src)"><div class="caption"><h3>MIMO 信道分析</h3><p>基于 4×4 信道矩阵进行容量、秩、条件数和奇异值可视化。</p></div></div>
+          <div class="card shot"><img src="assets/aeroray/coverage-analysis.png" alt="覆盖分析" onclick="openImageModal(this.src)"><div class="caption"><h3>覆盖统计分析</h3><p>通过 IR/PDF/CDF/Threshold 多视图分析 RadioMap 分布和弱覆盖区域。</p></div></div>
+          <div class="card shot"><img src="assets/aeroray/ground-dominance.png" alt="地面主导基站" onclick="openImageModal(this.src)"><div class="caption"><h3>地面多基站主导基站</h3><p>展示单平面多基站服务区域划分，用于地面覆盖态势评估。</p></div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">验证结果</h2>
+        <div class="timeline">
+          <div class="timeline-item"><b>算法对比</b><p>在西电真实场景长距离路径规划中，切换感知 A* 相比 Greedy 将基站切换次数从 7 降至 0，路径缩短 9.9%，搜索节点减少 40.3%。</p></div>
+          <div class="timeline-item"><b>测试体系</b><p>包含单元、真实场景集成、性能基准和对比实验共 29 个算法测试用例，文档记录为 100% 通过。</p></div>
+          <div class="timeline-item"><b>Agent 评测</b><p>LLM 编排评测包含 50 条 plan 用例和 10 条上下文用例，形成“指标 → 评测 → Prompt 反哺”的闭环。</p></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">AeroRay · 大模型驱动的低空电磁智能孪生平台</footer>
+  </div>
+
+  <div class="image-modal" id="imageModal" onclick="closeImageModal()">
+    <button type="button" onclick="closeImageModal()">×</button>
+    <img id="modalImage" src="" alt="截图预览">
+  </div>
+
+  <script>
+    function openImageModal(src) {
+      document.getElementById('modalImage').src = src;
+      document.getElementById('imageModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeImageModal() {
+      document.getElementById('imageModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeImageModal();
+    });
+  </script>
+</body>
+
+</html>

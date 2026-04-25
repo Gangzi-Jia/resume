@@ -517,6 +517,15 @@
     }
 
     /* ==================== Publications ==================== */
+    .pub-subtitle {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 40px 0 20px;
+      padding-left: 12px;
+      border-left: 4px solid var(--accent);
+    }
+
     .pub-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -635,6 +644,17 @@
       border-color: rgba(0, 212, 255, 0.25);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
       transform: translateY(-4px);
+    }
+
+    .project-card-link {
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .project-card-link:hover {
+      color: inherit;
     }
 
     .project-image {
@@ -765,6 +785,13 @@
       background: rgba(123, 97, 255, 0.1);
       color: var(--accent2);
       border: 1px solid rgba(123, 97, 255, 0.2);
+    }
+
+    .project-action {
+      margin-top: 18px;
+      color: var(--accent);
+      font-size: 0.86rem;
+      font-weight: 600;
     }
 
     /* ==================== Experience ==================== */
@@ -1121,7 +1148,7 @@
             <rect x="2" y="4" width="20" height="16" rx="2" />
             <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
           </svg>
-          gangzijia2002@163.com
+          gangzijia2002@163.com<br>2869098520@qq.com<br>jiahg@stu.xidian.edu.cn
         </div>
       </div>
     </div>
@@ -1239,28 +1266,26 @@
       <div class="projects-grid fade-in">
         <!-- AeroRay -->
         <div class="project-card full-width">
-          <img src="assets/AeroRay.png" alt="AeroRay" class="project-image" loading="lazy" decoding="async"
-            onclick="openImageModal(this.src)">
-          <div class="project-content">
-            <h3>AeroRay</h3>
-            <div class="project-subtitle">LLM驱动的低空电磁仿真智能孪生平台 | <a href="https://drive.google.com/file/d/1oQpO2oU7YwLtZhrm51yCilpsZmId--Zp/view?usp=sharing" target="_blank" style="color: var(--accent);">平台演示视频</a></div>
-            <div class="project-desc">
-              <ol>
-                <li><strong>核心创新：</strong>首个将大语言模型与低空电磁仿真深度融合的全栈平台。通过LangGraph ReAct Agent将WinProp射线追踪引擎封装为自然语言交互接口，用户通过对话完成从地理数据提取、建筑场景建模、多基站三维射线仿真到无人机航线规划的全链路操作。</li>
-                <li><strong>核心功能：</strong>低空多基站三维仿真、干扰态势4模式分析（RSRP/主导基站/SINR/重叠覆盖）、多基站感知航线规划、蜂群协同规划（1-10架无人机）。</li>
-                <li><strong>技术架构：</strong>React 18 + Three.js前端3D渲染，FastAPI + LangGraph后端，C++ WinProp SDK仿真引擎，双通道WebSocket实时通信。</li>
-              </ol>
+          <a href="aeroray.html" class="project-card-link">
+            <img src="assets/AeroRay.png" alt="AeroRay" class="project-image" loading="lazy" decoding="async">
+            <div class="project-content">
+              <h3>AeroRay</h3>
+              <div class="project-subtitle">大模型驱动的低空电磁智能孪生平台</div>
+              <div class="project-desc">
+                <p>AeroRay 将 LLM Agent、WinProp 工业级射线追踪、多基站三维信号场和无人机航线规划整合为一个可对话操作的全栈平台。用户通过自然语言即可完成区域解析、建筑建模、低空多基站仿真、干扰态势分析与蜂群协同规划。</p>
+              </div>
+              <div class="project-stack">
+                <span>React</span>
+                <span>Three.js</span>
+                <span>FastAPI</span>
+                <span>LangGraph</span>
+                <span>WinProp SDK</span>
+                <span>WebSocket</span>
+                <span>Agent Ops</span>
+              </div>
+              <div class="project-action">查看完整项目介绍 →</div>
             </div>
-            <div class="project-stack">
-              <span>React</span>
-              <span>Three.js</span>
-              <span>FastAPI</span>
-              <span>LangGraph</span>
-              <span>C++ WinProp SDK</span>
-              <span>WebSocket</span>
-              <span>Claude</span>
-            </div>
-          </div>
+          </a>
         </div>
 
         <!-- RadioDiff-Flux -->
@@ -1414,24 +1439,16 @@
     <div class="container">
       <div class="fade-in">
         <h2 class="section-title">发表论文</h2>
-        <p class="section-subtitle">已发表学术论文</p>
+        <p class="section-subtitle">共9篇 · 学生一作6篇 · 学生二作3篇 · 期刊论文5篇 · 会议论文2篇 · 在投2篇</p>
         <div class="section-divider"></div>
       </div>
+
+      <!-- 学生一作 -->
+      <h3 class="pub-subtitle fade-in">学生一作</h3>
       <div class="pub-grid">
 
         <div class="pub-card fade-in">
           <span class="pub-index">1</span>
-          <h3>RadioDiff-Flux: Efficient Radio Map Construction via Generative Denoise Diffusion Model Trajectory Midpoint Reuse</h3>
-          <p class="pub-citation">Wang X, Zheng P, Jia H, et al. RadioDiff-Flux: Efficient Radio Map Construction via Generative Denoise Diffusion Model Trajectory Midpoint Reuse[J]. IEEE Transactions on Cognitive Communications and Networking, 2025, 12: 4882-4895.</p>
-          <div class="pub-tags">
-            <span>IEEE TCCN</span>
-            <span>Diffusion Model</span>
-            <span>Midpoint Reuse</span>
-          </div>
-        </div>
-
-        <div class="pub-card fade-in">
-          <span class="pub-index">2</span>
           <h3>RadioMamba: Breaking the Accuracy-Efficiency Trade-off in Radio Map Construction via a Hybrid Mamba-UNet</h3>
           <p class="pub-citation">Jia H, Cheng N, Wang X, et al. RadioMamba: Breaking the Accuracy-Efficiency Trade-off in Radio Map Construction via a Hybrid Mamba-UNet[J]. IEEE Transactions on Network Science and Engineering, 2025.</p>
           <div class="pub-tags">
@@ -1442,29 +1459,79 @@
         </div>
 
         <div class="pub-card fade-in">
-          <span class="pub-index">3</span>
-          <h3>RadioMapMotion: A Dataset and Baseline for Proactive Spatio-Temporal Radio Environment Prediction</h3>
-          <p class="pub-citation">Jia H, Cheng N, Wang X. RadioMapMotion: A Dataset and Baseline for Proactive Spatio-Temporal Radio Environment Prediction[J]. arXiv preprint arXiv:2511.17526, 2025.</p>
+          <span class="pub-index">2</span>
+          <h3>RadioMapMotion: A Dataset and Benchmark for Proactive Spatio-Temporal Radio Environment Prediction</h3>
+          <p class="pub-citation">Cheng N, Jia H, Wang X, et al. RadioMapMotion: A Dataset and Benchmark for Proactive Spatio-Temporal Radio Environment Prediction[J]. IEEE Transactions on Cognitive Communications and Networking, 2026.</p>
           <div class="pub-tags">
-            <span>arXiv</span>
+            <span>IEEE TCCN</span>
             <span>Spatio-Temporal</span>
             <span>Dataset</span>
           </div>
         </div>
 
         <div class="pub-card fade-in">
-          <span class="pub-index">4</span>
+          <span class="pub-index">3</span>
           <h3>UrbanMIMOMap: A Ray-Traced MIMO CSI Dataset with Precoding-Aware Maps and Benchmarks</h3>
-          <p class="pub-citation">Jia H, Wang X, Cheng N, et al. UrbanMIMOMap: A Ray-Traced MIMO CSI Dataset with Precoding-Aware Maps and Benchmarks[J]. arXiv preprint arXiv:2509.06270, 2025.</p>
+          <p class="pub-citation">Jia H, Wang X, Cheng N, et al. UrbanMIMOMap: a ray-traced MIMO CSI dataset with precoding-aware maps and benchmarks[C]//Proceedings of the 2025 IEEE Global Communications Conference (GLOBECOM). IEEE, 2025: 49-54.</p>
           <div class="pub-tags">
-            <span>arXiv</span>
+            <span>IEEE GLOBECOM</span>
             <span>MIMO CSI</span>
             <span>Dataset</span>
           </div>
         </div>
 
         <div class="pub-card fade-in">
+          <span class="pub-index">4</span>
+          <h3>基于 NetLogo 的多智能体空战模拟</h3>
+          <p class="pub-citation">贾宏刚, 王伟, 承楠. 基于 NetLogo 的多智能体空战模拟[J]. Command Control & Simulation/Zhihui Kongzhi yu Fangzhen, 2025, 47(2).</p>
+          <div class="pub-tags">
+            <span>中文期刊</span>
+            <span>Multi-Agent</span>
+            <span>NetLogo</span>
+          </div>
+        </div>
+
+        <div class="pub-card fade-in">
           <span class="pub-index">5</span>
+          <h3>3D-EM Twin: High-Fidelity 3D Radio Digital Twin for Low-Altitude Aerial Networking and Operations</h3>
+          <p class="pub-citation">Jia H, Cheng N, Wang X, Sun R, Yin Z. 3D-EM Twin: High-Fidelity 3D Radio Digital Twin for Low-Altitude Aerial Networking and Operations[C]. IEEE ICCC (Demo Paper, 在投)</p>
+          <div class="pub-tags">
+            <span>IEEE ICCC Demo</span>
+            <span>3D Radio Map</span>
+            <span>Digital Twin</span>
+          </div>
+        </div>
+
+        <div class="pub-card fade-in">
+          <span class="pub-index">6</span>
+          <h3>Low-Altitude Intelligent Electromagnetic Sensing and Twining: Techniques, Applications and Potentials</h3>
+          <p class="pub-citation">Sun R, Jia H, Wang X, Peng H, Chai R, Cheng N. Low-Altitude Intelligent Electromagnetic Sensing and Twining: Techniques, Applications and Potentials[J]. IEEE Magazine (在投)</p>
+          <div class="pub-tags">
+            <span>IEEE Magazine</span>
+            <span>Low-Altitude</span>
+            <span>Radio Map</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 学生二作 -->
+      <h3 class="pub-subtitle fade-in">学生二作</h3>
+      <div class="pub-grid">
+
+        <div class="pub-card fade-in">
+          <span class="pub-index">7</span>
+          <h3>RadioDiff-Flux: Efficient Radio Map Construction via Generative Denoise Diffusion Model Trajectory Midpoint Reuse</h3>
+          <p class="pub-citation">Wang X, Zheng P, Jia H, et al. RadioDiff-Flux: Efficient Radio Map Construction via Generative Denoise Diffusion Model Trajectory Midpoint Reuse[J]. IEEE Transactions on Cognitive Communications and Networking, 2025, 12: 4882-4895.</p>
+          <div class="pub-tags">
+            <span>IEEE TCCN</span>
+            <span>Diffusion Model</span>
+            <span>Midpoint Reuse</span>
+          </div>
+        </div>
+
+        <div class="pub-card fade-in">
+          <span class="pub-index">8</span>
           <h3>Latent Diffusion Model Based Denoising Receiver for 6G Semantic Communication</h3>
           <p class="pub-citation">Wang X, Jia H, Cheng N. Latent diffusion model based denoising receiver for 6G semantic communication: From stochastic differential theory to application[J]. arXiv preprint arXiv:2506.05710, 2025.</p>
           <div class="pub-tags">
@@ -1475,13 +1542,13 @@
         </div>
 
         <div class="pub-card fade-in">
-          <span class="pub-index">6</span>
-          <h3>基于 NetLogo 的多智能体空战模拟</h3>
-          <p class="pub-citation">贾宏刚, 王伟, 承楠. 基于 NetLogo 的多智能体空战模拟[J]. Command Control & Simulation/Zhihui Kongzhi yu Fangzhen, 2025, 47(2).</p>
+          <span class="pub-index">9</span>
+          <h3>Amortized Neural SVD for XL-MIMO: Structure-Guided Factor Prediction for Beamforming and Multi-Stream Utility</h3>
+          <p class="pub-citation">Zhang Y, Jia H, Zhang Y, et al. Amortized Neural SVD for XL-MIMO: Structure-Guided Factor Prediction for Beamforming and Multi-Stream Utility[C]. IEEE Vehicular Technology Conference (VTC), 2026.</p>
           <div class="pub-tags">
-            <span>中文期刊</span>
-            <span>Multi-Agent</span>
-            <span>NetLogo</span>
+            <span>IEEE VTC</span>
+            <span>XL-MIMO</span>
+            <span>Neural SVD</span>
           </div>
         </div>
 
@@ -1587,7 +1654,7 @@
   <footer>
     <div class="container">
       <div class="footer-links">
-        <span>Email: gangzijia2002@163.com</span>
+        <span>Email:<br>gangzijia2002@163.com<br>2869098520@qq.com<br>jiahg@stu.xidian.edu.cn</span>
       </div>
       <p class="footer-copy">&copy; 2025 贾宏刚 (Honggang Jia). All rights reserved.</p>
     </div>
